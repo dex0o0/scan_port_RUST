@@ -15,41 +15,41 @@ pub async fn scan_ip_port(ip: &str, port: u16) -> bool {
     }
 }
 
-pub struct ScanPort {
-    pub ip: String,
-    pub port: u16,
-    pub up: Option<bool>,
-}
+// pub struct ScanPort {
+//     pub ip: String,
+//     pub port: u16,
+//     pub up: Option<bool>,
+// }
 
-impl ScanPort {
-    pub fn new(ip: &str, port: u16) -> Self {
-        Self {
-            ip: ip.to_string(),
-            port,
-            up: None,
-        }
-    }
+// impl ScanPort {
+//     pub fn new(ip: &str, port: u16) -> Self {
+//         Self {
+//             ip: ip.to_string(),
+//             port,
+//             up: None,
+//         }
+//     }
 
-    /// متد async که اسکن را اجرا و وضعیت را چاپ می‌کند
-    pub async fn scan(&mut self) {
-        let result = scan_ip_port(&self.ip, self.port).await;
-        self.up = Some(result);
+//     /// متد async که اسکن را اجرا و وضعیت را چاپ می‌کند
+//     pub async fn scan(&mut self) {
+//         let result = scan_ip_port(&self.ip, self.port).await;
+//         self.up = Some(result);
 
-        if result {
-            println!(
-                "{}",
-                format!("{}:{} is open", self.ip, self.port)
-                    .green()
-                    .bold()
-            );
-        } else {
-            println!(
-                "{}",
-                format!("{}:{} is closed", self.ip, self.port).red()
-            );
-        }
-    }
-}
+//         if result {
+//             println!(
+//                 "{}",
+//                 format!("{}:{} is open", self.ip, self.port)
+//                     .green()
+//                     .bold()
+//             );
+//         } else {
+//             println!(
+//                 "{}",
+//                 format!("{}:{} is closed", self.ip, self.port).red()
+//             );
+//         }
+//     }
+// }
 pub async fn scan_all_port(ip:&str){
     let semaphore = Arc::new(Semaphore::new(1000));
     let mut tasks =Vec::new();
